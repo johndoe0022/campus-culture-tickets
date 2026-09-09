@@ -97,6 +97,7 @@ app.post('/api/checkout', async (req, res) => {
     const phData = await phRes.json();
 
     if (!phRes.ok || phData.success === false) {
+      console.error('PayHero Rejection Details:', phData);
       await pool.query(`UPDATE orders SET status='FAILED', updated_at=now() WHERE reference=$1`, [reference]);
       return res.status(502).json({ error: 'Could not start M-Pesa prompt.', detail: phData });
     }
@@ -159,7 +160,7 @@ app.get('/api/orders', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 init()
   .then(() => {
-    app.listen(PORT, () => console.log(`Campus Culture ticket server running on :${PORT}`));
+    app.listen(PORT, '0.0.0.0', () => console.log(`Campus Culture ticket server running on :${PORT}`));
   })
   .catch((err) => {
     console.error('Failed to init DB', err);
