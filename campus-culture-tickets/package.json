@@ -1,0 +1,16 @@
+{
+  "name": "campus-culture-tickets",
+  "version": "1.0.0",
+  "description": "Ticket sales site for Campus Culture (Lunix Enterprises) with PayHero M-Pesa STK Push checkout",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "initdb": "node -e \"require('./db').init().then(()=>{console.log('DB ready');process.exit(0)})\""
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "dotenv": "^16.4.5",
+    "nanoid": "^3.3.7"
+  }
+}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Campus Culture — 25 Sep, Saju Gardens</title>
+<style>
+  :root{
+    --bg: #0b0b0d;
+    --bg-raised: #151517;
+    --gold: #e8b64c;
+    --gold-deep: #b8860b;
+    --steel: #8a8f98;
+    --line: #2a2a2e;
+    --white: #f5f2ea;
+    --danger: #c65252;
+    --ok: #5aa66a;
+    font-family: 'Georgia', 'Times New Roman', serif;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top, #1b1b1f 0%, var(--bg) 60%);
+    color: var(--white);
+    min-height:100vh;
+  }
+  .wrap{ max-width: 560px; margin:0 auto; padding: 32px 20px 80px; }
+
+  .brand{
+    text-align:center;
+    color: var(--steel);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  h1{
+    font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+    text-align:center;
+    font-size: clamp(42px, 12vw, 64px);
+    line-height: 0.95;
+    margin: 4px 0 2px;
+    background: linear-gradient(180deg, #ffe9a8 0%, var(--gold) 45%, var(--gold-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.01em;
+  }
+  .feature{
+    text-align:center;
+    color: var(--gold);
+    font-family: 'Arial Black', sans-serif;
+    font-size: 22px;
+    margin-bottom: 22px;
+  }
+  .meta-row{
+    display:flex;
+    justify-content:center;
+    gap: 22px;
+    color: var(--steel);
+    font-size: 14px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .meta-row span{ color: var(--white); }
+
+  .countdown{
+    border: 1px solid var(--gold-deep);
+    background: linear-gradient(180deg, rgba(232,182,76,0.10), rgba(232,182,76,0.02));
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align:center;
+    margin-bottom: 28px;
+    font-size: 14px;
+    color: var(--gold);
+  }
+  .countdown b{ font-variant-numeric: tabular-nums; }
+  .countdown.closed{
+    border-color: var(--line);
+    background: rgba(255,255,255,0.03);
+    color: var(--steel);
+  }
+
+  .tiers{ display:flex; flex-direction:column; gap: 12px; margin-bottom: 28px; }
+  .tier{
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .tier:hover{ border-color: var(--gold-deep); }
+  .tier.selected{
+    border-color: var(--gold);
+    background: linear-gradient(90deg, rgba(232,182,76,0.08), transparent);
+  }
+  .tier .name{ font-size: 18px; }
+  .tier .sub{ color: var(--steel); font-size: 12.5px; margin-top: 2px; }
+  .tier .price{ font-family: 'Arial Black', sans-serif; font-size: 20px; color: var(--gold); white-space:nowrap; }
+  .tier input{ display:none; }
+
+  form{ display:flex; flex-direction:column; gap: 14px; }
+  label{ font-size: 13px; color: var(--steel); margin-bottom: 4px; display:block; }
+  input[type=text], input[type=tel]{
+    width:100%;
+    padding: 12px 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 15px;
+    font-family: inherit;
+  }
+  input:focus{ outline: none; border-color: var(--gold); }
+
+  button.buy{
+    margin-top: 6px;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(180deg, #f2c869, var(--gold-deep));
+    color: #1a1300;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    cursor:pointer;
+  }
+  button.buy:disabled{ opacity: 0.5; cursor:not-allowed; }
+  button.buy:focus-visible{ outline: 2px solid var(--white); outline-offset: 2px; }
+
+  .status{
+    margin-top: 18px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
+    text-align:center;
+  }
+  .status.pending{ color: var(--gold); border-color: var(--gold-deep); }
+  .status.success{ color: var(--ok); border-color: var(--ok); }
+  .status.failed{ color: var(--danger); border-color: var(--danger); }
+
+  .fine{
+    margin-top: 34px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--steel);
+    font-size: 12.5px;
+    text-align:center;
+    line-height:1.6;
+  }
+  .fine b{ color: var(--danger); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">LUNIX ENTERPRISES LIMITED PRESENTS</div>
+  <h1>CAMPUS<br/>CULTURE</h1>
+  <div class="feature">ft. WAKADINALI</div>
+  <div class="meta-row">
+    <div>📅 <span>25 Sep</span></div>
+    <div>📍 <span>Saju Gardens</span></div>
+  </div>
+
+  <div id="countdown" class="countdown">Checking Early Bird availability…</div>
+
+  <form id="buyForm">
+    <div id="tiers" class="tiers"></div>
+
+    <div>
+      <label for="name">Full name</label>
+      <input type="text" id="name" required placeholder="e.g. Jane Wanjiru" />
+    </div>
+    <div>
+      <label for="phone">M-Pesa phone number</label>
+      <input type="tel" id="phone" required placeholder="07XX XXX XXX" />
+    </div>
+
+    <button class="buy" type="submit" id="buyBtn">Select a ticket</button>
+  </form>
+
+  <div id="statusBox"></div>
+
+  <div class="fine">
+    <b>Under 18 not allowed.</b> Entry strictly with ID.<br/>
+    For more information and table reservations: +254 114 960030
+  </div>
+</div>
+
+<script>
+const state = { tickets: {}, selected: null, cutoff: null };
+
+async function loadTickets(){
+  const res = await fetch('/api/tickets');
+  const data = await res.json();
+  state.tickets = data.tickets;
+  state.cutoff = data.early_bird_cutoff;
+  renderTiers();
+  renderCountdown(data.early_bird_open);
+}
+
+function renderTiers(){
+  const el = document.getElementById('tiers');
+  const subs = {
+    early_bird: 'Only available today — grab it before it closes',
+    regular: 'Standard entry',
+    vip: 'Priority entry + VIP area',
+  };
+  el.innerHTML = Object.entries(state.tickets).map(([key, t]) => `
+    <label class="tier" data-key="${key}">
+      <input type="radio" name="tier" value="${key}" />
+      <div>
+        <div class="name">${t.label}</div>
+        <div class="sub">${subs[key] || ''}</div>
+      </div>
+      <div class="price">KES ${t.amount}/=</div>
+    </label>
+  `).join('');
+
+  document.querySelectorAll('.tier').forEach(node => {
+    node.addEventListener('click', () => {
+      document.querySelectorAll('.tier').forEach(n => n.classList.remove('selected'));
+      node.classList.add('selected');
+      node.querySelector('input').checked = true;
+      state.selected = node.dataset.key;
+      const btn = document.getElementById('buyBtn');
+      btn.disabled = false;
+      btn.textContent = `Pay KES ${state.tickets[state.selected].amount}/= via M-Pesa`;
+    });
+  });
+}
+
+function renderCountdown(open){
+  const box = document.getElementById('countdown');
+  if (!state.cutoff){
+    box.textContent = open ? 'Early Bird tickets are on sale now.' : 'Early Bird tickets have closed.';
+    if (!open) box.classList.add('closed');
+    return;
+  }
+  const cutoff = new Date(state.cutoff);
+  function tick(){
+    const diff = cutoff - new Date();
+    if (diff <= 0){
+      box.classList.add('closed');
+      box.textContent = 'Early Bird tickets have closed — Regular and VIP still available.';
+      clearInterval(timer);
+      loadTickets(); // refresh so the Early Bird card disappears
+      return;
+    }
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    box.innerHTML = `Early Bird tickets close in <b>${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}</b> — book now`;
+  }
+  tick();
+  const timer = setInterval(tick, 1000);
+}
+
+document.getElementById('buyForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!state.selected) return;
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const btn = document.getElementById('buyBtn');
+  const statusBox = document.getElementById('statusBox');
+
+  btn.disabled = true;
+  btn.textContent = 'Sending M-Pesa prompt…';
+  statusBox.innerHTML = '';
+
+  try{
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ ticket_type: state.selected, buyer_name: name, phone_number: phone })
+    });
+    const data = await res.json();
+    if (!res.ok){ throw new Error(data.error || 'Something went wrong.'); }
+
+    statusBox.innerHTML = `<div class="status pending">Check your phone (${phone}) and enter your M-Pesa PIN to complete payment…</div>`;
+    pollStatus(data.reference);
+  }catch(err){
+    statusBox.innerHTML = `<div class="status failed">${err.message}</div>`;
+    btn.disabled = false;
+    btn.textContent = `Pay KES ${state.tickets[state.selected].amount}/= via M-Pesa`;
+  }
+});
+
+function pollStatus(reference){
+  const statusBox = document.getElementById('statusBox');
+  let attempts = 0;
+  const timer = setInterval(async () => {
+    attempts++;
+    const res = await fetch(`/api/order/${reference}`);
+    const data = await res.json();
+    if (data.status === 'SUCCESS'){
+      clearInterval(timer);
+      statusBox.innerHTML = `<div class="status success">🎟️ Payment confirmed! Ref: ${reference}${data.mpesa_receipt ? ' · M-Pesa: '+data.mpesa_receipt : ''}. See you on the 25th!</div>`;
+    } else if (data.status === 'FAILED'){
+      clearInterval(timer);
+      statusBox.innerHTML = `<div class="status failed">Payment was not completed. You can try again.</div>`;
+      document.getElementById('buyBtn').disabled = false;
+    } else if (attempts > 40){
+      clearInterval(timer);
+      statusBox.innerHTML = `<div class="status pending">Still waiting on confirmation for ref ${reference}. If you paid, hold onto this reference and contact +254 114 960030.</div>`;
+    }
+  }, 3000);
+}
+
+loadTickets();
+</script>
+</body>
+</html>
